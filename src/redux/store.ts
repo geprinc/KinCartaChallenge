@@ -1,4 +1,5 @@
-import {createStore, combineReducers} from 'redux';
+import {createStore, compose, combineReducers} from 'redux';
+import Reactotron from 'reactotron-react-native';
 
 import contacts from './contacts/reducer';
 
@@ -15,7 +16,12 @@ const reducers = combineReducers<State>({
   contacts,
 });
 
-// in dev mode, we'll create the store through Reactotron
-const store = createStore(reducers);
+const enhancers = [];
+
+if (__DEV__) enhancers.push(Reactotron.createEnhancer(true));
+
+const store = createStore(reducers, compose(...enhancers));
+
+if (__DEV__) Reactotron.setReduxStore(store);
 
 export default store;

@@ -1,5 +1,5 @@
 import {createTypes, completeTypes} from 'redux-recompose';
-import {getContacts} from '../../services/ContactService';
+import {getContacts} from '@services/ContactService';
 
 export const actions = createTypes(
   completeTypes(['GET_CONTACTS']),

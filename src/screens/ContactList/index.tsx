@@ -1,11 +1,10 @@
 import React, {useEffect} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {useDispatch} from 'react-redux';
+import {Routes} from '@constants/routes';
+import contactActions from '@redux/contacts/actions';
 
 import styles from './styles';
-
-import {Routes} from '../../constants/routes';
-import contactActions from '../../redux/contacts/actions';
 
 const ContactList = ({navigation}: any) => {
   const dispatch = useDispatch();
