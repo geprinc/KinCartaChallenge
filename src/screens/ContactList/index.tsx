@@ -1,16 +1,28 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
+import {useDispatch} from 'react-redux';
 
 import styles from './styles';
-import {Routes} from '../../constants/routes';
 
-const ContactList = ({navigation}: any) => (
-  <View style={styles.contaienr}>
-    <Text>ContactList</Text>
-    <TouchableOpacity onPress={() => navigation.navigate(Routes.ContactDetail)}>
-      <Text>Go to Detail</Text>
-    </TouchableOpacity>
-  </View>
-);
+import {Routes} from '../../constants/routes';
+import contactActions from '../../redux/contacts/actions';
+
+const ContactList = ({navigation}: any) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(contactActions.getContacts());
+  }, [dispatch]);
+
+  return (
+    <View style={styles.contaienr}>
+      <Text>ContactList</Text>
+      <TouchableOpacity
+        onPress={() => navigation.navigate(Routes.ContactDetail)}>
+        <Text>Go to Detail</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
 
 export default ContactList;
