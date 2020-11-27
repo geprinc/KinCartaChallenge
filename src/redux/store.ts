@@ -1,5 +1,6 @@
-import {createStore, compose, combineReducers} from 'redux';
+import {createStore, compose, combineReducers, applyMiddleware} from 'redux';
 import Reactotron from 'reactotron-react-native';
+import thunk from 'redux-thunk';
 
 import contacts from './contacts/reducer';
 
@@ -21,7 +22,11 @@ const reducers = combineReducers<any>({
   contacts,
 });
 
+const middlewares = [];
 const enhancers = [];
+
+middlewares.push(thunk);
+enhancers.push(applyMiddleware(...middlewares));
 
 if (__DEV__) enhancers.push(Reactotron.createEnhancer(true));
 

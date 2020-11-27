@@ -1,45 +1,44 @@
-import React, {useEffect, useState} from 'react';
-import {
-  View,
-  Text,
-  SectionList,
-  ActivityIndicator,
-  TouchableOpacity,
-} from 'react-native';
+import React, {useEffect} from 'react';
+import {View, Text, SectionList, ActivityIndicator} from 'react-native';
 import {Routes} from '@constants/routes';
+import {useSelector, useDispatch} from 'react-redux';
+import actionCreators from '@redux/contacts/actions';
 
 import styles from './styles';
-import {createContactList} from './utils';
+import {Contact, createContactList} from './utils';
+import ContactItem from './components/ContactItem/index';
 
 const ContactList = ({navigation}: any) => {
-  const [contacts, setContacts] = useState<any>([]);
-  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const contacts = useSelector((state: any) => state.contacts.contacts);
+  const loading = useSelector((state: any) => state.contacts.loading);
+  // const [contacts, setContacts] = useState<any>([]);
 
   useEffect(() => {
-    setLoading(true);
-    fetch('https://s3.amazonaws.com/technical-challenge/v3/contacts.json')
-      .then((response) => response.json())
-      .then((responseJson) => {
-        setContacts(createContactList(responseJson));
-        setLoading(false);
-      });
-  }, [setContacts, setLoading]);
+    dispatch(actionCreators.getContacts());
+    // setLoading(true);
+    // fetch('https://s3.amazonaws.com/technical-challenge/v3/contacts.json')
+    //   .then((response) => response.json())
+    //   .then((responseJson) => {
+    //     setContacts(createContactList(responseJson));
+    //     setLoading(false);
+    //   });
+  }, [dispatch]);
 
-  const renderItem = ({item}: {item: any}) => (
-    <TouchableOpacity
-      onPress={() => navigation.navigate(Routes.ContactDetail, {item})}>
-      <Text>{item.name}</Text>
-    </TouchableOpacity>
+  const renderItem = ({item}: {item: Contact}) => (
+    <ContactItem
+      contact={item}
+      onPress={() => navigation.navigate(Routes.ContactDetail, {item})}
+    />
   );
 
-  console.log(contacts);
   return (
     <View style={styles.container}>
       {loading ? (
         <ActivityIndicator />
       ) : contacts?.length ? (
         <SectionList
-          sections={contacts}
+          sections={createContactList(contacts)}
           keyExtractor={(item) => item.id}
           renderItem={renderItem}
           renderSectionHeader={({section: {title}}) => (

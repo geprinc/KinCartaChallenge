@@ -1,19 +1,49 @@
-const sortedByName = (contactList: any) =>
-  contactList.sort((contact1: any, contact2: any) =>
-    contact1.name >= contact2.name ? 1 : -1,
+import Immutable from 'seamless-immutable';
+
+type Address = {
+  city?: string;
+  country?: string;
+  state?: string;
+  street?: string;
+  zipCode?: string;
+};
+
+type Phone = {
+  work?: string;
+  home?: string;
+};
+
+export interface Contact {
+  address: Address;
+  birthdate?: string;
+  companyName?: string;
+  emailAddress?: string;
+  id: string;
+  isFavorite: boolean;
+  largeImageURL?: string; // replace with image type
+  name: string;
+  phone: Phone;
+  smallImageUrl?: string; // replace with image type
+}
+
+const sortedByName = (contactList: Contact[]) =>
+  Immutable.asMutable(
+    contactList,
+  ).sort((contact1: Contact, contact2: Contact) =>
+    contact1.name.localeCompare(contact2.name),
   );
 
-export const createContactList = (contactList: any) => [
+export const createContactList = (contactList: Contact[]) => [
   {
     title: 'FAVORITE CONTACTS',
     data: sortedByName(
-      contactList.filter((contact: any) => contact.isFavorite),
+      contactList.filter((contact: Contact) => contact.isFavorite),
     ),
   },
   {
     title: 'OTHER CONTACTS',
     data: sortedByName(
-      contactList.filter((contact: any) => !contact.isFavorite),
+      contactList.filter((contact: Contact) => !contact.isFavorite),
     ),
   },
 ];
