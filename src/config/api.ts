@@ -1,7 +1,7 @@
 import {create} from 'apisauce';
 import Reactotron from 'reactotron-react-native';
 
-const baseURL = 'https://s3.amazonaws.com/technical-challenge/v3';
+const baseURL = 'https://s3.amazonaws.com/technical-challenge/v3/';
 
 const api = create({
   baseURL,

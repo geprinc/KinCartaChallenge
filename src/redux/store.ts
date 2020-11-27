@@ -8,11 +8,16 @@ type Contact = {
   favorite: boolean;
 };
 
-interface State {
+type Contacts = {
+  loading: boolean;
   contacts: Contact[];
+};
+
+interface State {
+  contacts: Contacts;
 }
 
-const reducers = combineReducers<State>({
+const reducers = combineReducers<any>({
   contacts,
 });
 

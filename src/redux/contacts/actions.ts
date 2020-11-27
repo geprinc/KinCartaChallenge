@@ -1,21 +1,25 @@
-import {createTypes, completeTypes} from 'redux-recompose';
-import {getContacts} from '@services/ContactService';
+import {Dispatch} from 'react';
+import {getContactsTwo} from '@services/ContactService';
 
-export const actions = createTypes(
-  completeTypes(['GET_CONTACTS']),
-  '@@CONTACTS',
-);
-
-const targets = {
-  CONTACTS: 'contacts',
+export const actions = {
+  GET_CONTACTS: '@@CONTACTS:GET_CONTACTS',
+  GET_CONTACTS_SUCCESS: '@@CONTACTS:GET_CONTACTS_SUCCESS',
+  GET_CONTACTS_FAILURE: '@@CONTACTS:GET_CONTACTS_FAILURE',
 };
 
 const actionCreators = {
-  getContacts: () => ({
-    type: actions.GET_CONTACTS,
-    target: targets.CONTACTS,
-    service: getContacts,
-  }),
+  getContacts: () => async (dispatch: Dispatch<any>) => {
+    dispatch({type: actions.GET_CONTACTS});
+    const contacts = await fetch('https://s3.amazonaws.com/technical-challenge/v3/contacts.json')
+    .then((response) => response.json())
+    .then((responseJson) => responseJson)
+    .catch((error) => error);
+    if (contacts?.length) {
+      dispatch({type: actions.GET_CONTACTS_SUCCESS, payload: {contacts}});
+    } else {
+      dispatch({type: actions.GET_CONTACTS_FAILURE});
+    }
+  },
 };
 
 export default actionCreators;
