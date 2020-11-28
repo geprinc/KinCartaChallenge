@@ -1,6 +1,9 @@
 import {StyleSheet} from 'react-native';
 import {darkGray} from '@constants/colors';
 
+const starSize = 16;
+const imageSize = 60;
+
 export default StyleSheet.create({
   container: {
     flex: 1,
@@ -10,25 +13,30 @@ export default StyleSheet.create({
     marginVertical: 10,
   },
   innerContainer: {
-    paddingVertical: 10,
+    paddingVertical: 20,
     width: '90%',
     flexDirection: 'row',
     justifyContent: 'flex-start',
   },
-  lowerBorder: {
-    borderBottomColor: darkGray,
-    borderBottomWidth: 1,
-  },
   contactImage: {
     marginRight: 20,
-    width: 60,
-    height: 60,
+    width: imageSize,
+    height: imageSize,
   },
   star: {
-    width: 20,
-    height: 20,
+    marginTop: 4,
+    width: starSize,
+    height: starSize,
   },
   textContainer: {
     marginLeft: 5,
+  },
+  name: {
+    fontSize: 18,
+    color: darkGray,
+  },
+  address: {
+    fontSize: 12,
+    color: 'gray',
   },
 });

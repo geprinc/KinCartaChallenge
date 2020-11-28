@@ -7,14 +7,14 @@ import styles from './styles';
 const DataItem = ({item: {title, textItems}}: {item: DetailItem}) => {
   const renderText = (item: Data) => (
     <View style={styles.textRow}>
-      <Text>{item.text}</Text>
-      {item?.type && <Text>{item.type}</Text>}
+      <Text style={styles.mainText}>{item.text}</Text>
+      {item?.type && <Text style={styles.type}>{item.type}</Text>}
     </View>
   );
 
   return (
     <View style={styles.container}>
-      <Text>{title}</Text>
+      <Text style={styles.title}>{title}</Text>
       {textItems.map(renderText)}
     </View>
   );

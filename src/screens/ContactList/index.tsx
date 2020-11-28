@@ -31,6 +31,8 @@ const ContactList = ({navigation}: any) => {
     section: {title: string};
   }) => <Text style={styles.header}>{title}</Text>;
 
+  const renderSeparator = () => <View style={styles.separator} />;
+
   return (
     <View style={styles.container}>
       {loading ? (
@@ -41,6 +43,7 @@ const ContactList = ({navigation}: any) => {
           keyExtractor={(item) => item.id}
           renderItem={renderItem}
           renderSectionHeader={renderSectionHeader}
+          ItemSeparatorComponent={renderSeparator}
         />
       ) : (
         <Text>No Contacts</Text>

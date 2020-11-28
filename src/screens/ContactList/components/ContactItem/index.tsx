@@ -9,12 +9,11 @@ import styles from './styles';
 interface Props {
   contact: Contact;
   onPress: () => {};
-  isLast?: boolean;
 }
 
-const ContactItem = ({contact, onPress, isLast}: Props) => (
+const ContactItem = ({contact, onPress}: Props) => (
   <TouchableOpacity style={styles.container} onPress={onPress}>
-    <View style={[styles.innerContainer, !isLast && styles.lowerBorder]}>
+    <View style={styles.innerContainer}>
       <Image
         source={
           contact.smallImageUrl ? {uri: contact.smallImageUrl} : imgDefault
@@ -27,8 +26,10 @@ const ContactItem = ({contact, onPress, isLast}: Props) => (
         <View style={styles.star} />
       )}
       <View style={styles.textContainer}>
-        <Text>{contact.name}</Text>
-        {contact.address.street && <Text>{contact.address.street}</Text>}
+        <Text style={styles.name}>{contact.name}</Text>
+        {contact.address.street && (
+          <Text style={styles.address}>{contact.address.street}</Text>
+        )}
       </View>
     </View>
   </TouchableOpacity>

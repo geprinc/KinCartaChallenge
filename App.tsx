@@ -9,6 +9,7 @@ import ContactDetail from './src/screens/ContactDetail';
 import ContactList from './src/screens/ContactList';
 import {Routes} from './src/constants/routes';
 import store from './src/redux/store';
+import {lightGray} from '@constants/colors';
 
 const Stack = createStackNavigator();
 
@@ -20,12 +21,22 @@ const App = () => {
           <Stack.Screen
             name={Routes.ContactList}
             component={ContactList}
-            options={{title: 'Contacts'}}
+            options={{
+              title: 'Contacts',
+              headerStyle: {
+                backgroundColor: lightGray,
+              },
+            }}
           />
           <Stack.Screen
             name={Routes.ContactDetail}
             component={ContactDetail}
-            options={{title: ''}}
+            options={{
+              title: '',
+              headerStyle: {
+                backgroundColor: lightGray,
+              },
+            }}
           />
         </Stack.Navigator>
       </NavigationContainer>
