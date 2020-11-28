@@ -6,7 +6,7 @@ import styles from './styles';
 
 const DataItem = ({item: {title, textItems}}: {item: DetailItem}) => {
   const renderText = (item: Data) => (
-    <View style={styles.textRow}>
+    <View style={styles.textRow} key={item.text}>
       <Text style={styles.mainText}>{item.text}</Text>
       {item?.type && <Text style={styles.type}>{item.type}</Text>}
     </View>

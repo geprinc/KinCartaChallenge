@@ -43,16 +43,17 @@ export const genereateDetailList = (contact: Contact) => {
       title: 'PHONE',
       textItems: [{text: phone.work, type: 'Work'}],
     });
-  detailList.push({
-    id: '4',
-    title: 'ADDRESS',
-    textItems: [
-      {text: address.street},
-      {
-        text: `${address.city}, ${address.state} ${address.zipCode}, ${address.country}`,
-      },
-    ],
-  });
+  address &&
+    detailList.push({
+      id: '4',
+      title: 'ADDRESS',
+      textItems: [
+        {text: address.street},
+        {
+          text: `${address.city}, ${address.state} ${address.zipCode}, ${address.country}`,
+        },
+      ],
+    });
   contact?.birthdate &&
     detailList.push({
       id: '5',

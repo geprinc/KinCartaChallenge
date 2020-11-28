@@ -7,7 +7,6 @@ import 'react-native-gesture-handler';
 
 import ContactDetail from './src/screens/ContactDetail';
 import ContactList from './src/screens/ContactList';
-import {Routes} from './src/constants/routes';
 import store from './src/redux/store';
 import {lightGray} from '@constants/colors';
 
@@ -17,9 +16,9 @@ const App = () => {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName={Routes.ContactList}>
+        <Stack.Navigator initialRouteName="ContactList">
           <Stack.Screen
-            name={Routes.ContactList}
+            name="ContactList"
             component={ContactList}
             options={{
               title: 'Contacts',
@@ -29,7 +28,7 @@ const App = () => {
             }}
           />
           <Stack.Screen
-            name={Routes.ContactDetail}
+            name="ContactDetail"
             component={ContactDetail}
             options={{
               title: '',

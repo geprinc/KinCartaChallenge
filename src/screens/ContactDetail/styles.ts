@@ -7,6 +7,7 @@ const imageSize = screenWidth * 0.5;
 
 export default StyleSheet.create({
   container: {
+    flex: 1,
     paddingHorizontal: 10,
     paddingTop: 10,
     backgroundColor: 'white',

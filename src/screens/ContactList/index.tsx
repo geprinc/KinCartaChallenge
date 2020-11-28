@@ -1,18 +1,29 @@
 import React, {useEffect} from 'react';
 import {View, Text, SectionList, ActivityIndicator} from 'react-native';
-import {Routes} from '@constants/routes';
+import {StackNavigationProp} from '@react-navigation/stack';
 import {useSelector, useDispatch} from 'react-redux';
 import actionCreators from '@redux/contacts/actions';
 import {Contact} from '@interfaces/contacts';
+import {RootStackParamList} from '@interfaces/navigation';
+import {StoreState} from '@interfaces/state';
 
 import styles from './styles';
 import {createContactList} from './utils';
 import ContactItem from './components/ContactItem/index';
 
-const ContactList = ({navigation}: any) => {
+type ContactListScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'ContactList'
+>;
+
+type Props = {
+  navigation: ContactListScreenNavigationProp;
+};
+
+const ContactList = ({navigation}: Props) => {
   const dispatch = useDispatch();
-  const contacts = useSelector((state: any) => state.contacts.contacts);
-  const loading = useSelector((state: any) => state.contacts.loading);
+  const contacts = useSelector((state: StoreState) => state.contacts.contacts);
+  const loading = useSelector((state: StoreState) => state.contacts.loading);
 
   useEffect(() => {
     dispatch(actionCreators.getContacts());
@@ -21,7 +32,9 @@ const ContactList = ({navigation}: any) => {
   const renderItem = ({item}: {item: Contact}) => (
     <ContactItem
       contact={item}
-      onPress={() => navigation.navigate(Routes.ContactDetail, {contact: item})}
+      onPress={async () =>
+        navigation.navigate('ContactDetail', {contact: item})
+      }
     />
   );
 
