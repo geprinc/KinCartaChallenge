@@ -1,25 +1,36 @@
 ### KIN + KARTA Challenge from Guido Princ
 
+For both cases you must have a terminal running the packager using:
 
-To run project you can use common command like:
+`yarn run packager`
 
-For iOS:
+Then to run for each device:
 
-`react-native run-ios`
+- iOS:
 
-For Android:
+First install pods using:
 
-`react-native run-android`
+`yarn run pods`
 
-TODOs i would like to add
+then run project using
+
+`yarn run ios`
+
+- Android:
+
+Just run the project using
+
+`yarn run android`
+
+
+
+# TODOs I would like to add
 
 - Tests
 
 - Better Interfaces and components management
 
 - Changed Details map to a FlatList (i didn't do it because i had a Typescript error and didn't want to waste time)
-
-- We use Redux Recompose to reduce redux lines of common code.
 
 - I could avoid repeating many styles if i extract them into a general common style between screens.
 
