@@ -17,8 +17,16 @@ const App = () => {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator initialRouteName={Routes.ContactList}>
-          <Stack.Screen name={Routes.ContactList} component={ContactList} />
-          <Stack.Screen name={Routes.ContactDetail} component={ContactDetail} />
+          <Stack.Screen
+            name={Routes.ContactList}
+            component={ContactList}
+            options={{title: 'Contacts'}}
+          />
+          <Stack.Screen
+            name={Routes.ContactDetail}
+            component={ContactDetail}
+            options={{title: ''}}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

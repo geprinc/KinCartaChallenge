@@ -1,30 +1,5 @@
 import Immutable from 'seamless-immutable';
-
-type Address = {
-  city?: string;
-  country?: string;
-  state?: string;
-  street?: string;
-  zipCode?: string;
-};
-
-type Phone = {
-  work?: string;
-  home?: string;
-};
-
-export interface Contact {
-  address: Address;
-  birthdate?: string;
-  companyName?: string;
-  emailAddress?: string;
-  id: string;
-  isFavorite: boolean;
-  largeImageURL?: string; // replace with image type
-  name: string;
-  phone: Phone;
-  smallImageUrl?: string; // replace with image type
-}
+import { Contact } from '@interfaces/contacts';
 
 const sortedByName = (contactList: Contact[]) =>
   Immutable.asMutable(
