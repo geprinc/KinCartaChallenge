@@ -23,6 +23,7 @@ module.exports = {
           '@screens': './src/screens',
           '@services': './src/services',
           '@redux': './src/redux',
+          '@interfaces': './src/interfaces',
         },
       },
     ],

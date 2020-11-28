@@ -1,8 +1,9 @@
-import 'react-native-gesture-handler';
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {Provider} from 'react-redux';
+import '@config/reactotron';
+import 'react-native-gesture-handler';
 
 import ContactDetail from './src/screens/ContactDetail';
 import ContactList from './src/screens/ContactList';
@@ -16,8 +17,16 @@ const App = () => {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator initialRouteName={Routes.ContactList}>
-          <Stack.Screen name={Routes.ContactList} component={ContactList} />
-          <Stack.Screen name={Routes.ContactDetail} component={ContactDetail} />
+          <Stack.Screen
+            name={Routes.ContactList}
+            component={ContactList}
+            options={{title: 'Contacts'}}
+          />
+          <Stack.Screen
+            name={Routes.ContactDetail}
+            component={ContactDetail}
+            options={{title: ''}}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

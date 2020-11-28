@@ -1,19 +1,29 @@
-import {createReducer, completeReducer, completeState} from 'redux-recompose';
-import immutable from 'seamless-immutable';
+import Immutable from 'seamless-immutable';
 
 import {actions} from './actions';
 
-const stateDescription = {
-  banks: [],
+const defaultState = {
+  loading: false,
+  contacts: [],
+  error: null,
 };
-
-const initialState = completeState(stateDescription);
-
-const reducerDescription = {
-  primaryActions: [actions.GET_CONTACTS],
-};
-
-export default createReducer(
-  immutable(initialState),
-  completeReducer(reducerDescription),
-);
+export default function reducer(state = Immutable(defaultState), action: any) {
+  switch (action.type) {
+    case actions.GET_CONTACTS: {
+      return state.merge({loading: true, error: null});
+    }
+    case actions.GET_CONTACTS_SUCCESS: {
+      return state.merge({loading: false, contacts: action.payload.contacts});
+    }
+    case actions.GET_CONTACTS_FAILURE: {
+      return state.merge({
+        loading: false,
+        contacts: [],
+        error: action.payload.error,
+      });
+    }
+    default: {
+      return state;
+    }
+  }
+}
